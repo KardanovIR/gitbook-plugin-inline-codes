@@ -31,6 +31,11 @@
     height: 14px;
 }
 
+.markdown-section .wd-code__icon:active
+{
+    transform: translate(1px, 1px);
+}
+
 .markdown-section .wd-code__icon::before
 {
     content: "";
