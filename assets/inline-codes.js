@@ -56,8 +56,10 @@ jQuery(document).ready(function() {
     function
         initiateCodeSection(node) {
             var
-                wrap = document.createElement('span'),
-                icon = document.createElement('span');
+                pre = node.parentNode.tagName.toLowerCase() == 'pre' ? true : false,
+                wrap = pre ? node.parentNode : document.createElement('span'),
+                icon = document.createElement('span'),
+                scroll = null;
 
             node.className = 'wd-code__source';
 
@@ -68,8 +70,17 @@ jQuery(document).ready(function() {
 
             wrap.className = 'wd-code';
             wrap.appendChild(icon);
-            node.parentNode.insertBefore(wrap, node);
-            wrap.insertBefore(node, icon);
+
+            if (pre) {
+                scroll = document.createElement('span');
+                scroll.className = 'wd-code__scroll';
+                wrap.insertBefore(scroll, node);
+                scroll.appendChild(node);
+                wrap.insertBefore(scroll, icon);
+            } else {
+                node.parentNode.insertBefore(wrap, node);
+                wrap.insertBefore(node, icon);
+            }
         }
 
 
